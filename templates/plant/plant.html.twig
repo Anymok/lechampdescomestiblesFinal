@@ -1,0 +1,22 @@
+<div class="card mb-4">
+   {% if plants.pictures is not empty %}
+        <img src="{{ vich_uploader_asset(plants.picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+    {% else %}
+        <img src="{{ '/images/plants/empty.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-tittle">
+        <a href="{{ path('catalogue.show', {slug: plants.slug, id: plants.id}) }}">
+            {{ plants.title }}
+        </a>
+        </h5>
+        <p class="card-text">{{ plants.color }} ({{ plants.type }})</p>
+        <div class="text-primary" style="font-size:2rem; fontweight: bold;">
+            {{ plants.price }} €
+        </div>
+    </div>
+</div>
+
+
+
+

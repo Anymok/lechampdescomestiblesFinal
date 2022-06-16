@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title "Catalogue" %}
+
+{% block body %}
+<div class="jumbotron text-center" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+    <div class="container ">
+    <form method="get" action="/catalogue" style="display: inline-block ">
+        <div class="row align-items-end form-group">
+                <div class="col form-floating">
+                    <input type="text" id="ref" name="ref" value="{{ref}}" placeholder="Référence" class="form-control"/>
+                    <label for="ref">Référence</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" id="title" name="title" value="{{title}}" placeholder="Titre" class="form-control"/>
+                    <label for="title">Titre</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" id="color" name="color" value="{{color}}" placeholder="Couleur" class="form-control"/>
+                    <label for="color">Couleur</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" id="type" name="type" value="{{type}}" placeholder="Type" class="form-control"/>
+                    <label for="type">Type</label>
+                </div>
+                  <div class="col">
+                    <button class ="btn btn-primary" style="padding: 1rem 2.50rem;">Rechercher</button>
+                </div>
+            </div>
+            </form>
+
+    </div>
+</div>
+
+
+<div class="container mt-4 ">
+    <h2 class="p-3">Catalogue</h2>
+    <div id="catalogue" ></div>
+</div>
+
+     <div id="react"></div>
+
+{% endblock %}
+
+
+

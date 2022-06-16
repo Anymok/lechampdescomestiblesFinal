@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+
+{% block title plants.title %}
+
+{% block body %}
+
+<div class="jumbotron " style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if count >= 2 %}
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                {% if plants.pictures is not empty %}
+                                    <img src="{{ vich_uploader_asset(plants.picture, 'imageFile') | imagine_filter('medium') }}" class="d-block w-100" alt="1">
+                                {% endif %}
+                            </div>
+                                {% for image in image %}
+                                    {% if (pic.filename != image.filename) %}
+                                    <div class="carousel-item">
+                                        <img src="{{ asset('/images/plants/' ~ image.filename ~ '') | imagine_filter('medium') }}" class="d-block w-100" alt="2">
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                        </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                    </div>
+                {% else %}
+                    {% if plants.pictures is not empty %}
+                        <img src="{{ vich_uploader_asset(plants.picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% else %}
+                        <img src="{{ '/images/plants/empty.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                    {% endif %}
+                {% endif %}   
+            </div>
+            <div class="col-md-4 text-end">
+                <h1>{{ plants.title }}</h1>
+                <h2>quantité - {{ plants.quantity }}</h2>
+                <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ plants.price }} €</div>
+                {% if (app.user) %} 
+                <form method="post" class="text-center" action="{{ path('catalogue.add', {id: plants.id}) }}" style="display: inline-block ">
+                    <input type="number" class="m-3" name="_quantity" max={{ plants.quantity }} min="1" value="1">
+                    <input type="hidden" name="_method" value="ADD">
+                    <input type="hidden" name="_token" value="{{ csrf_token('add' ~ plants.id) }}">
+                    <br>
+                    <button class="btn btn-primary ">Ajouter au panier</button>
+                </form>
+                {% else %} 
+                    <a href="{{ path('login') }}" class="btn btn-primary">Ajouter au panier</a>
+                {% endif %} 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <p> {{ plants.description | nl2br }} </p>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Caractéristiques</h2>
+            <table class=" table table-striped">
+                <tr>
+                    <td>Quantité</td>
+                    <td>{{ plants.quantity }}</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>{{ plants.type }}</td>
+                </tr>
+                <tr>
+                    <td>Couleur</td>
+                    <td>{{ plants.color }}</td>
+                </tr>
+                <tr>
+                    <td>Référence</td>
+                    <td>{{ plants.id }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

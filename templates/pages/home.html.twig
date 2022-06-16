@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Accueil' %}
+
+{% block body %}
+<div class="jumbotron text-center" style=" padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: .3rem;">
+    <h1>Le champ des comestibles</h1>
+    <p>Production bio de légumes, fleurs comestibles et utiles.</p>
+</div>
+
+
+<div class="container">
+    <h2>Les dernières plantes</h2>
+    <div class="row flex">
+    {% for plants in plants %}
+        <div class="col-3">
+              {% include 'plant/plant.html.twig' %}
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

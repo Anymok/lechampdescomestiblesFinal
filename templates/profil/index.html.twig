@@ -1,0 +1,61 @@
+
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les objets' %}
+
+{% block body %}
+<div class="jumbotron text-center shadow" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+<div class="container mt-4">
+
+    <h2>Profil</h2>
+</div>
+</div>
+<div class="container mt-4">
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+
+</div>
+
+<div class="container">
+    {{ form_start(form) }}
+    
+            <div class="row justify-content-md-center p-2">
+              <div class="col-md-9"><h4>Information personnelle</h4></div>
+            </div>
+             <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.prenom)}}</div>
+              <div class="col-md-4">{{ form_row(form.nom)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.mail)}}</div>
+              <div class="col-md-4">{{ form_row(form.tel)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2 mt-3">
+              <div class="col-md-4 text-start"></div>
+              <div class="col-md-4 text-end"><button class="btn btn-primary" type="submit">Enregistrer</button></div>
+            </div>
+
+            <div class="row justify-content-md-center p-2">
+              <div class="col-md-9"><h4>Adresse de livraison</h4></div>
+            </div>
+             <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.Rue)}}</div>
+              <div class="col-md-4">{{ form_row(form.CP)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.Pays)}}</div>
+              <div class="col-md-4">{{ form_row(form.Ville)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2 mt-3">
+              <div class="col-md-4 text-start"></div>
+              <div class="col-md-4 text-end"><button class="btn btn-primary" type="submit">Enregistrer</button></div>
+            </div>
+{{ form_end(form) }}
+</div>
+
+{% endblock %}

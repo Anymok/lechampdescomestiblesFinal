@@ -1,0 +1,67 @@
+
+<div style="margin-top:1%; padding:2%;">
+  <h3>Le champ des comestibles</h3>
+  <p style="color:#616875;">32 Rue de Briquemare</p>
+  <p style="color:#616875;">76930 Cauville-sur-Mer</p>
+  <p style="color:#616875;">France</p>
+</div>
+
+{% for commande in commande %}
+
+<div style="margin-top:1%; padding:2%;">
+  <p>{{ commande.nom }} - {{ commande.prenom }}</p>
+  <p>{{ commande.Rue }}</p>
+  <p>{{ commande.CP }} {{ commande.Ville }}, {{ commande.Pays }}</p>
+  <p>Tél: {{ commande.tel }}</p>
+</div>
+
+
+<div style="margin-top: -40%; padding:2%; margin-left:60%; ">
+<div style="background-color:#616875;"><h2>FACTURE</h2></div>
+  <p>Date de facture : {{ commande.getCreatedAt() }}</p>
+  <p>Numéro de facture : {{ commande.id }}</p>
+  <p>Montant total : {{ commande.Mtotal }} €</p>
+</div>
+ {% endfor %}
+
+<table>
+    <thead>
+      <tr>
+        <th style="padding-left: 100px;
+    padding-right: 100px;">DESCRIPTION</th>
+        <th style="padding-left: 20px;
+    padding-right: 20px;">QUANTITÉ</th>
+        <th style="padding-left: 30px;
+    padding-right: 30px;">PRIX UNITAIRE</th>
+        <th style="padding-left: 20px;
+    padding-right: 20px;">MONTANT</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for plants in plants %}
+      <tr>
+      <td>{{ plants.title }}</td>
+          <td style="text-align:center">{{ plants.quantity }}</td>
+          <td style="text-align:center">{{ plants.price }} €</td>
+          <td style="text-align:center">{{ plants.quantity * plants.price }} €</td>
+      </tr>
+      {% endfor %}
+     
+    </tbody>
+  </table>
+
+  
+
+<style>
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+</style>

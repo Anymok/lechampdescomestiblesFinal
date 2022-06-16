@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+             <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.Rue)}}</div>
+              <div class="col-md-4">{{ form_row(form.CP)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2">
+              <div class="col-md-4">{{ form_row(form.Pays)}}</div>
+              <div class="col-md-4">{{ form_row(form.Ville)}}</div>
+            </div>
+            <div class="row justify-content-md-center p-2 mt-3">
+              <div class="col-md-4 text-start"><button class="btn btn-outline-secondary " href="{{ path('profil.index') }}">Annuler</button></div>
+              <div class="col-md-4 text-end"><button class="btn btn-primary ">{{ button|default('Enregistrer') }}</button></div>
+              
+            </div>
+{{ form_end(form) }}
+
+           

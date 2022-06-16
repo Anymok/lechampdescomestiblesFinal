@@ -1,0 +1,63 @@
+
+{% extends "base.html.twig" %}
+
+{% block title 'Gérer les objets' %}
+
+{% block body %}
+<div class="jumbotron text-center shadow" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+<div class="container mt-4">
+
+    <h2>Gestion du catalogue</h2>
+</div>
+</div>
+<div class="container mt-4">
+
+    <div class="text-center pt-5 pb-5">
+      <a href="{{ path('admin.plants.new') }}" class="btn btn-primary shadow">Créer un nouveau bien</a>
+    </div>
+    
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>Reférence</th>
+    <th>Titre</th>
+    <th>Quantité</th>
+    <th>Prix</th>
+    <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    {% for plants in plants %}
+    <tr>
+        <td>{{ plants.id }}</td>
+        <td>{{ plants.title }}</td>
+        <td>{{ plants.quantity }}</td>
+        <td>{{ plants.price }} €</td>
+        <td class="text-center">
+            <a href="{{ path('admin.plants.edit', {id: plants.id}) }}" class="btn btn-secondary">Editer</a>
+            <form method="post" action="{{ path('admin.plants.delete', {id: plants.id}) }}" style="display: inline-block" onsubmit="return confirm('valider')">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ plants.id) }}">
+                <button class="btn btn-danger ">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+     </tbody>
+    </table>
+
+
+</div>
+
+    
+
+{% endblock %}

@@ -1,0 +1,57 @@
+
+{% extends "base.html.twig" %}
+
+{% block title 'Gestion des comptes' %}
+
+{% block body %}
+
+<div class="jumbotron text-center shadow" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+<div class="container mt-4">
+
+    <h2>Gestion des comptes</h2>
+</div>
+</div>
+<div class="container mt-4">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Mot de passe</th>
+    <th>Rôle</th>
+    <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    {% for user in user %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.role }}</td>
+            <td class="text-center">
+                <form method="post" action="{{ path('admin.user.reverse', {id: user.id}) }}" style="display: inline-block" onsubmit="return confirm('valider')">
+                    <input type="hidden" name="_method" value="REVERSE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('reverse' ~ user.id) }}">
+                    <button class="btn btn-warning ">Inverser le grade</button>
+                </form>
+
+                <form method="post" action="{{ path('admin.user.delete', {id: user.id}) }}" style="display: inline-block" onsubmit="return confirm('valider')">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn-danger ">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+     </tbody>
+    </table>
+</div>
+{% endblock %}

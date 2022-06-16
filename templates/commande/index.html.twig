@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos commandes{% endblock %}
+
+{% block body %}
+<div class="jumbotron text-center shadow" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+  <div class="container mt-4">
+    <h2>Historique de vos commandes</h2>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Numéro de la commande</th>
+        <th>Prix total</th>
+        <th class="text-center">Facture PDF</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for CommandePlants, commande in commande %}
+      <tr>
+      <td>{{ commande.id }}</td>
+          <td>{{ commande.Mtotal }} euros</td>
+          <td class="text-center">
+               <form method="post" action="{{ path('commande.pdf', {id: commande.id}) }}" style="display: inline-block">
+                    <input type="hidden" name="_method" value="DOWNLOAD">
+                    <input type="hidden" name="_id" value="{{ commande.id }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('download' ~ commande.id) }}">
+                    <button class="btn btn-primary ">Obtenir</button>
+                </form>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+   
+        <div class="jumbotron text-center shadow" style=" padding: 2rem 1rem; margin-bottom: 2rem; background-color: #e9ecef; border-radius: .3rem;">
+<div class="container mt-4">
+
+    <h2>Modifier votre adresse de livraison</h2>
+</div>
+</div>
+    <div class="container mt-4">
+        {{ include('profil/_form.html.twig', {button: 'Editer'}) }}
+        
+    </div>
+   
+       
+
+{% endblock %}
+
